@@ -12,11 +12,17 @@ app.use(cors());
 app.use(express.json());
 
 const server = http.createServer(app);
+
+// CLIENT_URL can be a single origin, comma-separated list, or * (all origins).
+const rawOrigin = process.env.CLIENT_URL || 'http://localhost:5173';
+const corsOrigin = rawOrigin === '*'
+  ? '*'
+  : rawOrigin.includes(',')
+    ? rawOrigin.split(',').map(s => s.trim())
+    : rawOrigin;
+
 const io = new Server(server, {
-  cors: {
-    origin: process.env.CLIENT_URL || 'http://localhost:5173',
-    methods: ['GET', 'POST'],
-  },
+  cors: { origin: corsOrigin, methods: ['GET', 'POST'] },
 });
 
 app.get('/health', (_req, res) => res.json({ status: 'ok' }));
