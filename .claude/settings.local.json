@@ -2,7 +2,8 @@
   "permissions": {
     "allow": [
       "PowerShell(Start-Sleep -Seconds 1; Invoke-WebRequest -Uri \"http://localhost:3001/health\" -UseBasicParsing | Select-Object -ExpandProperty Content)",
-      "PowerShell(Start-Sleep -Seconds 2; \\(Invoke-WebRequest -Uri \"http://localhost:3001/health\" -UseBasicParsing\\).Content)"
+      "PowerShell(Start-Sleep -Seconds 2; \\(Invoke-WebRequest -Uri \"http://localhost:3001/health\" -UseBasicParsing\\).Content)",
+      "Bash(git rm *)"
     ]
   }
 }
